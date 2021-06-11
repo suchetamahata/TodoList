@@ -1,4 +1,4 @@
-import React,{Component} from 'react'
+import React from 'react'
 import Todo from './Todo'
 
 const TodoList = ({ todos, setTodos, filterTodos }) =>{
@@ -11,7 +11,6 @@ const TodoList = ({ todos, setTodos, filterTodos }) =>{
                       key={todo.id} 
                       text={todo.text}  
                       todo={todo}  >
-
                 </Todo>
             ))}
         </ul>
