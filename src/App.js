@@ -1,40 +1,41 @@
-import Form from './components/Form'
-import TodoList from './components/TodoList'
-import React,{useState, useEffect} from 'react'
-import './App.css';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+} from 'react-router-dom';
+import './App.css'
 
-function App() {
-  const [inputText,setInputText] = useState("");
-  const [todos,setTodos] = useState([]);
-  const [status,setStatus] = useState("");
-  const [filterTodos, setFilterTodos] = useState([]);
+import CreateTodos from './pages/createTodo';
+import ViewTodos from './pages/viewTodo';
 
- useEffect(()=>{
-( () =>{
-    switch(status){
-      case "completed":
-        setFilterTodos(todos.filter((todo)=> todo.completed === true));
-      break;
-      case "uncompleted":
-        setFilterTodos(todos.filter((todo)=> todo.completed === false));
-      break;
-      default:
-        setFilterTodos(todos)
-      break;
-    }
-  }) ()
- }, [todos, status]);
-
-  return (
-    <div className="App">
-      <header>
-        <h2>Su's ToDo List</h2>
-      </header>
-      <Form inputText={inputText} todos={todos} setTodos={setTodos} 
-            setInputText={setInputText} setStatus={setStatus} ></Form>
-      <TodoList todos={todos} setTodos={setTodos} filterTodos={filterTodos}></TodoList>
-    </div>
-  );
+const App = () => {
+ return(
+     <Router>
+         <div>
+             <header>
+                 <h3> Your ToDo List</h3>
+             </header>
+             <h5 className='wel-text'> What would you like to do today? </h5>
+             <ul className='linkss'>
+                 <li>
+                     <Link to='create'  className='card'> Create Todos </Link>
+                 </li>
+                 <li>
+                     <Link to='view'  className='cardv' > View Todos</Link>
+                 </li>
+             </ul>
+         </div>
+         <Switch>
+             <Route exact path='/create'>
+                 <CreateTodos/>
+             </Route>
+             <Route path='/view/:uuid'>
+                 <ViewTodos/>
+             </Route>
+         </Switch>
+     </Router>
+ )
 }
 
 export default App;

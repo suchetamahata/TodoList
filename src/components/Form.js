@@ -8,14 +8,17 @@ const Form = ({setInputText, todos, setTodos, inputText, setStatus,}) =>{
         event.preventDefault();
         setTodos([
             ...todos,
-            {text: inputText, completed:false, id: Math.random() *1000 },
+            {item: inputText, isCompleted:false, id: Math.random() *1000 },
         ]);
         setInputText("")
+        //console.log(todos)
     }
     const statusHandler=(event)=> {
         setStatus(event.target.value)
     }
+ 
         return(
+            <div>
         <form>
             <input value={inputText} onChange={inputFormHandler} type='text' className='todo-input'/>
             <button onClick={suubmitTodoHandler} type='submit' className='todo-button'>
@@ -28,8 +31,11 @@ const Form = ({setInputText, todos, setTodos, inputText, setStatus,}) =>{
                     <option value='uncompleted'>Uncompleted</option>
                 </select>
             </div>
+            
         </form>
+        
+        </div>
     )
 }
 
-export default Form
+export default Form 
